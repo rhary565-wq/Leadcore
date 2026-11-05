@@ -1,0 +1,28 @@
+{
+  "name": "leadcore-backend",
+  "version": "2.0.0",
+  "description": "YodSales Pro x LeadGen unified backend (Apify / Google Maps search, Apollo, HubSpot, AI)",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "dependencies": {
+    "@google-cloud/secret-manager": "^5.0.0",
+    "@google-cloud/tasks": "^5.0.0",
+    "@supabase/supabase-js": "^2.39.0",
+    "axios": "^1.6.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "resend": "^2.0.0",
+    "uuid": "^9.0.0",
+    "ws": "^8.16.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
