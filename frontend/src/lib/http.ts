@@ -1,5 +1,6 @@
 // Authenticated fetch to the unified backend. Adds the Supabase access token.
 import { supabase } from './supabase';
+import { demoFetch, demoMode } from './demo';
 
 export const API_URL = ((import.meta.env.VITE_API_URL as string | undefined) || 'http://localhost:8080').replace(/\/$/, '');
 
@@ -10,6 +11,7 @@ export async function authHeaders(): Promise<Record<string, string>> {
 }
 
 export async function apiFetch(path: string, options: RequestInit = {}): Promise<Response> {
+  if (demoMode) return demoFetch(path, options);
   const url = path.startsWith('http') ? path : `${API_URL}${path}`;
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',

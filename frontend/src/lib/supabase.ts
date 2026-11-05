@@ -6,7 +6,7 @@ const key = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
 export const supabaseConfigured = Boolean(url && key);
 
 // No-login mode (local testing only): VITE_AUTH_DISABLED=true + backend AUTH_REQUIRED=false
-export const authDisabled = import.meta.env.VITE_AUTH_DISABLED === 'true';
+export const authDisabled = import.meta.env.VITE_AUTH_DISABLED === 'true' || import.meta.env.VITE_DEMO === 'true';
 
 // Auth only — all data goes through the backend API.
 export const supabase = createClient(url || 'https://placeholder.supabase.co', key || 'placeholder', {

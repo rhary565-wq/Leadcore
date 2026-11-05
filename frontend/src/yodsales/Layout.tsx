@@ -4,6 +4,7 @@ import { useLang } from '@/lib/i18n';
 import { useSession } from '@/lib/session';
 import { API_URL } from '@/lib/http';
 import { authDisabled } from '@/lib/supabase';
+import { demoMode } from '@/lib/demo';
 
 type NavItem = { to: string; en: string; th: string; icon: string; end?: boolean };
 type NavGroup = { en: string; th: string; items: NavItem[] };
@@ -52,6 +53,7 @@ export default function Layout() {
 
   useEffect(() => setOpen(false), [loc.pathname]);
   useEffect(() => {
+    if (demoMode) { setOnline(true); return; }
     let stop = false;
     const check = () => fetch(`${API_URL}/health`).then(r => !stop && setOnline(r.ok)).catch(() => !stop && setOnline(false));
     check();
@@ -118,7 +120,7 @@ export default function Layout() {
             </div>
           </NavLink>
           {authDisabled ? (
-            <p className="w-full mt-3 py-2 text-center text-[10px] font-black uppercase text-amber-300 tracking-[0.2em]">No-login mode</p>
+            <p className="w-full mt-3 py-2 text-center text-[10px] font-black uppercase text-amber-300 tracking-[0.2em]">{demoMode ? t('Demo · sample data', 'เดโม · ข้อมูลตัวอย่าง') : 'No-login mode'}</p>
           ) : <button onClick={signOut} className="w-full mt-3 py-2 text-[10px] font-black uppercase text-white/40 hover:text-[#ED1C24] transition-colors tracking-[0.2em]">
             {t('Sign Out', 'ออกจากระบบ')}
           </button>}
@@ -137,7 +139,7 @@ export default function Layout() {
               className={`hidden sm:flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full border ${
                 online === null ? 'text-slate-400 border-slate-200' : online ? 'text-emerald-600 bg-emerald-50 border-emerald-100' : 'text-red-600 bg-red-50 border-red-100'}`}>
               <span className={`w-1.5 h-1.5 rounded-full ${online ? 'bg-emerald-500 animate-pulse' : online === false ? 'bg-red-500' : 'bg-slate-300'}`} />
-              {online === false ? 'API Offline' : 'API Live'}
+              {demoMode ? t('Demo data', 'ข้อมูลตัวอย่าง') : online === false ? 'API Offline' : 'API Live'}
             </span>
             <div className="flex items-center rounded-full p-1 border bg-slate-100/80 border-slate-200">
               {(['EN', 'TH'] as const).map(l => (
@@ -150,6 +152,11 @@ export default function Layout() {
 
         <div className="flex-1 overflow-y-auto">
           <div className="max-w-[1500px] mx-auto px-4 py-6 md:px-8 md:py-8 min-h-full flex flex-col">
+            {demoMode && (
+              <div className="mb-5 px-4 py-2.5 rounded-2xl bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold">
+                {t('Demo with sample data. The businesses and contacts shown are examples, not real records, and nothing you change is saved.', 'เดโมพร้อมข้อมูลตัวอย่าง ธุรกิจและผู้ติดต่อที่แสดงเป็นตัวอย่าง ไม่ใช่ข้อมูลจริง และจะไม่มีการบันทึกการเปลี่ยนแปลง')}
+              </div>
+            )}
             <div className="flex-1 pb-12"><Outlet /></div>
             <footer className="py-6 border-t border-slate-200 flex justify-end gap-6 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
               <NavLink to="/support" className="hover:text-[#242A56]">{t('Support', 'สนับสนุน')}</NavLink>

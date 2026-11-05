@@ -1,5 +1,9 @@
 import React, { Suspense, lazy } from 'react';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, MemoryRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { demoMode } from '@/lib/demo';
+
+// The shareable demo runs inside a sandboxed frame, so it keeps its route in memory
+const Router = demoMode ? MemoryRouter : BrowserRouter;
 import { LangProvider, useLang } from '@/lib/i18n';
 import { SessionProvider, useSession } from '@/lib/session';
 import Layout from '@/yodsales/Layout';
@@ -89,12 +93,12 @@ function Gate() {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <LangProvider>
         <SessionProvider>
           <Gate />
         </SessionProvider>
       </LangProvider>
-    </BrowserRouter>
+    </Router>
   );
 }
