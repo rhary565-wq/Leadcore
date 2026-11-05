@@ -1,4 +1,4 @@
-// YodSales AI Sales Assistant — Gemini, called from the server so the API key
+// Leadcore AI Sales Assistant — Gemini, called from the server so the API key
 // never reaches the browser. The assistant is grounded on the user's real
 // LeadGen data (lead counts, hot leads, top industries) and, optionally, one lead.
 const router = require('express').Router();
@@ -50,7 +50,7 @@ router.post('/chat', async (req, res) => {
 
     const ctx = await dataContext(leadId);
     const system = [
-      'You are YodSales Smart Guide, an AI sales assistant for B2B field sales teams in Thailand.',
+      'You are Leadcore Smart Guide, an AI sales assistant for B2B field sales teams in Thailand.',
       'You help with territory planning, prioritising leads, outreach messages (email, LINE, phone scripts), objection handling and next steps.',
       'Be practical, specific and concise. Use the user\'s real data below when it is relevant; never invent numbers that are not in it.',
       lang === 'TH' ? 'Reply in Thai (ภาษาไทย).' : 'Reply in English unless the user writes in Thai.',

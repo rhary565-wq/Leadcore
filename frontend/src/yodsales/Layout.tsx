@@ -79,7 +79,7 @@ export default function Layout() {
           <button className="flex flex-col text-left group" onClick={() => navigate('/')}>
             <span className="flex items-center gap-3">
               <span className="text-3xl drop-shadow-md group-hover:scale-110 transition-transform">🇹🇭</span>
-              <span className="text-3xl font-black italic tracking-tighter [text-shadow:_0_2px_8px_rgba(0,0,0,0.45)]">YodSales</span>
+              <span className="text-3xl font-black italic tracking-tighter [text-shadow:_0_2px_8px_rgba(0,0,0,0.45)]">Leadcore</span>
             </span>
             <span className="text-[9px] text-blue-200 mt-2 font-black uppercase tracking-[0.3em] opacity-80 pl-1">
               {t('Peak Sales Performance', 'ขีดสุดแห่งประสิทธิภาพการขาย')}
@@ -119,7 +119,7 @@ export default function Layout() {
           <button onClick={signOut} className="w-full mt-3 py-2 text-[10px] font-black uppercase text-white/40 hover:text-[#ED1C24] transition-colors tracking-[0.2em]">
             {t('Sign Out', 'ออกจากระบบ')}
           </button>
-          <span className="text-[9px] text-white/20 font-bold uppercase tracking-widest block text-center">© 2026 YodSales Thailand</span>
+          <span className="text-[9px] text-white/20 font-bold uppercase tracking-widest block text-center">© 2026 Leadcore Thailand</span>
         </div>
       </aside>
 

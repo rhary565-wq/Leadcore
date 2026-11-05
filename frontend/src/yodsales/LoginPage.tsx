@@ -98,7 +98,7 @@ export default function LoginPage() {
           </div>
           <div className="flex items-center gap-3">
             <span className="text-4xl drop-shadow-xl">🇹🇭</span>
-            <h1 className="text-5xl font-black italic tracking-tighter [text-shadow:_0_4px_15px_rgba(0,0,0,0.5)]">YodSales</h1>
+            <h1 className="text-5xl font-black italic tracking-tighter [text-shadow:_0_4px_15px_rgba(0,0,0,0.5)]">Leadcore</h1>
           </div>
           <p className="text-blue-200 mt-3 font-black uppercase tracking-[0.3em] text-xs">{t('Peak Sales Performance', 'ขีดสุดแห่งประสิทธิภาพการขาย')}</p>
           <p className="text-emerald-400 mt-1 font-bold italic text-sm">{t('Elevating Every Opportunity', 'ยกระดับทุกโอกาสการขาย')}</p>
@@ -126,7 +126,7 @@ export default function LoginPage() {
           <div className="flex justify-between items-center">
             <div className="md:hidden flex items-center gap-2">
               <span className="text-2xl">🇹🇭</span>
-              <span className="font-black text-2xl text-slate-800 italic tracking-tighter">YodSales</span>
+              <span className="font-black text-2xl text-slate-800 italic tracking-tighter">Leadcore</span>
             </div>
             <div className="ml-auto flex items-center rounded-full p-1 border bg-slate-100/80 border-slate-200">
               {(['EN', 'TH'] as const).map(l => (
@@ -137,7 +137,7 @@ export default function LoginPage() {
 
           <div className="space-y-2">
             <h2 className="text-3xl font-black text-slate-900 tracking-tight">
-              {isSignUp ? t('Join YodSales', 'เข้าร่วม YodSales') : t('Welcome Back', 'ยินดีต้อนรับกลับมา')}
+              {isSignUp ? t('Join Leadcore', 'เข้าร่วม Leadcore') : t('Welcome Back', 'ยินดีต้อนรับกลับมา')}
             </h2>
             <p className="text-[#ED1C24] text-xs font-black uppercase tracking-widest">{t('Precision Sales. Peak Results.', 'การขายที่แม่นยำ สู่ผลลัพธ์อันสูงสุด')}</p>
           </div>

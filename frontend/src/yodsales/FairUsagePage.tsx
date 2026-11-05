@@ -12,12 +12,12 @@ const FairUsagePage: React.FC<FairUsagePageProps> = ({ language, theme }) => {
 
   const t = {
     title: language === 'EN' ? 'Data Governance & Fair Use' : 'ธรรมาภิบาลข้อมูลและนโยบายการใช้งาน',
-    subtitle: language === 'EN' ? 'Strict compliance protocols for YodSales Pro Thailand operators.' : 'ระเบียบการปฏิบัติตามข้อกำหนดอย่างเคร่งครัดสำหรับผู้ปฏิบัติงาน YodSales Pro',
+    subtitle: language === 'EN' ? 'Strict compliance protocols for Leadcore Thailand operators.' : 'ระเบียบการปฏิบัติตามข้อกำหนดอย่างเคร่งครัดสำหรับผู้ปฏิบัติงาน Leadcore',
     lastUpdated: language === 'EN' ? 'REVISED: NOVEMBER 2026' : 'แก้ไขล่าสุด: พฤศจิกายน 2569',
     introTitle: language === 'EN' ? 'Compliance Mandate' : 'คำสั่งการปฏิบัติตามข้อกำหนด',
     introText: language === 'EN' 
-      ? 'To safeguard the integrity of the YodSales network and maintain compliance with the Thailand PDPA (B.E. 2562) and Google Fair Usage Policies, all users must adhere to the following zero-tolerance restrictions.'
-      : 'เพื่อปกป้องความสมบูรณ์ของเครือข่าย YodSales และรักษาการปฏิบัติตาม PDPA ของไทย (พ.ศ. 2562) และนโยบายการใช้งานที่ยุติธรรมของ Google ผู้ใช้ทุกคนต้องปฏิบัติตามข้อจำกัดที่เข้มงวดดังต่อไปนี้',
+      ? 'To safeguard the integrity of the Leadcore network and maintain compliance with the Thailand PDPA (B.E. 2562) and Google Fair Usage Policies, all users must adhere to the following zero-tolerance restrictions.'
+      : 'เพื่อปกป้องความสมบูรณ์ของเครือข่าย Leadcore และรักษาการปฏิบัติตาม PDPA ของไทย (พ.ศ. 2562) และนโยบายการใช้งานที่ยุติธรรมของ Google ผู้ใช้ทุกคนต้องปฏิบัติตามข้อจำกัดที่เข้มงวดดังต่อไปนี้',
     sections: [
       {
         title: language === 'EN' ? '1. DATA EXTRACTION QUOTAS' : '1. โควตาการดึงข้อมูล',

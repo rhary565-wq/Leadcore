@@ -29,8 +29,8 @@ export default function AIAssistant() {
   const company = params.get('company') || '';
 
   const welcome: Msg = { id: 'welcome', role: 'assistant', content: t(
-    "Hi! I'm YodSales Smart Guide. I can see your LeadGen results — ask me which leads to call first, draft a LINE or email message, or plan a territory visit.",
-    'สวัสดีครับ! ผม YodSales Smart Guide ผมเห็นข้อมูลลูกค้าจาก LeadGen ของคุณ — ถามได้เลยว่าควรโทรหาใครก่อน ให้ช่วยร่างข้อความ LINE/อีเมล หรือวางแผนลงพื้นที่') };
+    "Hi! I'm Leadcore Smart Guide. I can see your LeadGen results — ask me which leads to call first, draft a LINE or email message, or plan a territory visit.",
+    'สวัสดีครับ! ผม Leadcore Smart Guide ผมเห็นข้อมูลลูกค้าจาก LeadGen ของคุณ — ถามได้เลยว่าควรโทรหาใครก่อน ให้ช่วยร่างข้อความ LINE/อีเมล หรือวางแผนลงพื้นที่') };
 
   const [messages, setMessages] = useState<Msg[]>(() => {
     try { const s = sessionStorage.getItem(STORE); if (s) return JSON.parse(s); } catch { /* ignore */ }

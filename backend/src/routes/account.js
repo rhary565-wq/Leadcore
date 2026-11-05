@@ -1,4 +1,4 @@
-// YodSales account features: profile, targets, activity log, support tickets,
+// Leadcore account features: profile, targets, activity log, support tickets,
 // personal sales pipeline (Sales Hub) and saved search templates.
 const router = require('express').Router();
 const { supabase } = require('../db/supabase');
@@ -95,7 +95,7 @@ router.post('/support', async (req, res) => {
       try {
         const { Resend } = require('resend');
         await new Resend(process.env.RESEND_API_KEY).emails.send({
-          from: process.env.RESEND_FROM_EMAIL || 'YodSales <onboarding@resend.dev>',
+          from: process.env.RESEND_FROM_EMAIL || 'Leadcore <onboarding@resend.dev>',
           to: process.env.SUPPORT_EMAIL,
           subject: `[Support] ${data.subject}`,
           text: `From: ${data.name} <${data.email}>\n\n${data.message}`,
