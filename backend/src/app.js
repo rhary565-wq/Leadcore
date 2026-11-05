@@ -75,6 +75,7 @@ app.use((err, req, res, next) => {
 });
 
 if (require.main === module) {
+  if (process.env.AUTH_REQUIRED === 'false') console.warn('⚠️  AUTH_REQUIRED=false — NO LOGIN. Anyone who can reach this server can use it. Local testing only!');
   app.listen(PORT, () => console.log(`✅ Leadcore backend running on port ${PORT}`));
 }
 

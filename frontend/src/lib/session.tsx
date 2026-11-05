@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import type { Session } from '@supabase/supabase-js';
-import { supabase } from './supabase';
+import { authDisabled, supabase } from './supabase';
 import { ys, type Profile } from './yodsalesApi';
 import { useLang } from './i18n';
 
@@ -21,6 +21,12 @@ type Ctx = {
 };
 
 const SessionContext = createContext<Ctx>(null as unknown as Ctx);
+
+// Stand-in session for no-login mode
+const DEMO_SESSION = {
+  access_token: '', refresh_token: '', token_type: 'bearer', expires_in: 0, expires_at: 0,
+  user: { id: '00000000-0000-0000-0000-000000000000', email: 'demo@local', aud: 'authenticated', app_metadata: {}, user_metadata: { full_name: 'Demo User' }, created_at: '' },
+} as unknown as Session;
 
 function storedTheme(): Theme {
   try { const t = localStorage.getItem('yodsales_theme') as Theme; return THEMES.includes(t) ? t : 'Light'; } catch { return 'Light'; }
@@ -52,6 +58,7 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
   }, [setLang]);
 
   useEffect(() => {
+    if (authDisabled) { setSession(DEMO_SESSION); setLoading(false); return; }
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session);
       setLoading(false);
@@ -75,6 +82,7 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
   };
 
   const signOut = async () => {
+    if (authDisabled) return;
     await ys.logActivity('Logout');
     await supabase.auth.signOut();
     setSession(null);
@@ -82,7 +90,7 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
 
   const meta = session?.user?.user_metadata || {};
   const userName = profile?.full_name || meta.full_name || meta.name || session?.user?.email || 'Field Agent';
-  const isAdmin = Boolean(profile?.isAdmin || profile?.role === 'admin');
+  const isAdmin = authDisabled || Boolean(profile?.isAdmin || profile?.role === 'admin');
 
   return (
     <SessionContext.Provider value={{ session, profile, loading, profileError, theme, setTheme, refreshProfile, signOut, userName, isAdmin }}>

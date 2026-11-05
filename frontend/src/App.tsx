@@ -38,8 +38,8 @@ function YodSalesPage({ which }: { which: 'support' | 'fair' }) {
 }
 
 function AdminOnly({ children }: { children: React.ReactNode }) {
-  const { isAdmin, profile } = useSession();
-  if (!profile) return <Spinner />;
+  const { isAdmin, profile, profileError } = useSession();
+  if (!profile && !profileError) return <Spinner />;
   return isAdmin ? <>{children}</> : <Navigate to="/" replace />;
 }
 

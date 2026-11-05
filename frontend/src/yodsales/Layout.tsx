@@ -3,6 +3,7 @@ import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useLang } from '@/lib/i18n';
 import { useSession } from '@/lib/session';
 import { API_URL } from '@/lib/http';
+import { authDisabled } from '@/lib/supabase';
 
 type NavItem = { to: string; en: string; th: string; icon: string; end?: boolean };
 type NavGroup = { en: string; th: string; items: NavItem[] };
@@ -116,9 +117,11 @@ export default function Layout() {
               <p className="text-[9px] text-blue-200 font-bold uppercase mt-1.5 tracking-tight">{isAdmin ? t('System Admin', 'ผู้ดูแลระบบ') : (profile?.role || t('Sales Rep', 'พนักงานขาย'))}</p>
             </div>
           </NavLink>
-          <button onClick={signOut} className="w-full mt-3 py-2 text-[10px] font-black uppercase text-white/40 hover:text-[#ED1C24] transition-colors tracking-[0.2em]">
+          {authDisabled ? (
+            <p className="w-full mt-3 py-2 text-center text-[10px] font-black uppercase text-amber-300 tracking-[0.2em]">No-login mode</p>
+          ) : <button onClick={signOut} className="w-full mt-3 py-2 text-[10px] font-black uppercase text-white/40 hover:text-[#ED1C24] transition-colors tracking-[0.2em]">
             {t('Sign Out', 'ออกจากระบบ')}
-          </button>
+          </button>}
           <span className="text-[9px] text-white/20 font-bold uppercase tracking-widest block text-center">© 2026 Leadcore Thailand</span>
         </div>
       </aside>
