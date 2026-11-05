@@ -23,7 +23,9 @@ const { supabase } = require('../db/supabase');
 
 // ── Environment ───────────────────────────────────────────────────────────────
 const APOLLO_API_KEY  = (process.env.APOLLO_API_KEY  || '').trim();
-const PUBLIC_BASE_URL = (process.env.PUBLIC_BASE_URL || '').trim();
+const PUBLIC_BASE_URL = (process.env.PUBLIC_BASE_URL
+  || (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : '')
+  || '').trim();
 const APOLLO_BASE     = 'https://api.apollo.io/api/v1';
 
 if (!APOLLO_API_KEY)  console.warn('[apollo] ⚠️  APOLLO_API_KEY not set');

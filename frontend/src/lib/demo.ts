@@ -82,7 +82,7 @@ function summary() {
 
 let geo: any[] | null = null;
 async function loadGeo() {
-  if (!geo) geo = (await import('../../../backend/src/data/thailand-geo.json')).default as any[];
+  if (!geo) geo = (await import('../data/thailand-geo.json')).default as any[];
   return geo;
 }
 

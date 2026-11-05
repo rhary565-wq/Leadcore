@@ -142,7 +142,7 @@ async function apolloEnrichPerson(p) {
       api_key:                apiKey,
       reveal_personal_emails: true,
       reveal_phone_number:    true,
-      webhook_url:            (process.env.BACKEND_URL || 'https://leadgen-backend-769244413910.asia-southeast1.run.app') + '/api/apollo/phone-webhook',
+      webhook_url:            (process.env.PUBLIC_BASE_URL || process.env.BACKEND_URL || (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : 'https://leadgen-backend-769244413910.asia-southeast1.run.app')) + '/api/apollo/phone-webhook',
     };
     if (p.apollo_id)    payload.id                = p.apollo_id;
     if (p.first_name)   payload.first_name        = p.first_name;

@@ -55,7 +55,7 @@ export default function Layout() {
   useEffect(() => {
     if (demoMode) { setOnline(true); return; }
     let stop = false;
-    const check = () => fetch(`${API_URL}/health`).then(r => !stop && setOnline(r.ok)).catch(() => !stop && setOnline(false));
+    const check = () => fetch(`${API_URL}/api/health`).then(r => !stop && setOnline(r.ok)).catch(() => !stop && setOnline(false));
     check();
     const id = setInterval(check, 30_000);
     return () => { stop = true; clearInterval(id); };

@@ -11,6 +11,7 @@
     "@google-cloud/secret-manager": "^5.0.0",
     "@google-cloud/tasks": "^5.0.0",
     "@supabase/supabase-js": "^2.39.0",
+    "@vercel/functions": "^2.0.0",
     "axios": "^1.6.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",

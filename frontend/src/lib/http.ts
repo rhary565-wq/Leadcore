@@ -2,7 +2,8 @@
 import { supabase } from './supabase';
 import { demoFetch, demoMode } from './demo';
 
-export const API_URL = ((import.meta.env.VITE_API_URL as string | undefined) || 'http://localhost:8080').replace(/\/$/, '');
+// Empty = same domain (Vercel routes /api/* to the backend). Set VITE_API_URL only when the API lives elsewhere.
+export const API_URL = ((import.meta.env.VITE_API_URL as string | undefined) || '').replace(/\/$/, '');
 
 export async function authHeaders(): Promise<Record<string, string>> {
   const { data } = await supabase.auth.getSession();

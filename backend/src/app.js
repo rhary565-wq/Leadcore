@@ -35,7 +35,7 @@ app.use(cors({ origin: [...allowed, /\.run\.app$/] }));
 app.use(express.json({ limit: '10mb' })); // 10mb for large lead batches
 
 // ── Public endpoints ─────────────────────────────────────────────────────────
-app.get('/health', (req, res) => {
+app.get(['/health', '/api/health'], (req, res) => {
   res.json({ status: 'ok', service: 'leadcore-backend', time: new Date().toISOString() });
 });
 app.use('/api/locations', locationRoutes);            // static Thai geography

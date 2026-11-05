@@ -4,7 +4,8 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  server: { port: 3000, host: '0.0.0.0' },
+  // /api → local backend, so the app works on one origin like on Vercel
+  server: { port: 3000, host: '0.0.0.0', proxy: { '/api': 'http://localhost:8080' } },
   preview: { port: 3000, host: '0.0.0.0' },
   resolve: {
     alias: {

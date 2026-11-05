@@ -29,7 +29,12 @@ cd backend  && npm install && npm run dev
 cd frontend && npm install && npm run dev
 ```
 
-## 4. Deploy (Google Cloud Run)
+## 4. Deploy on Vercel
+`vercel.json` deploys two services in one Vercel project: `frontend` (Vite) at `/` and `backend` (Express) at `/api/*`.
+Import the GitHub repo in Vercel and add the backend + frontend environment variables (from the two `.env.example` files) in Project Settings. Leave `VITE_API_URL` empty.
+On Vercel the search pipeline runs inside the backend function, so very large searches can hit the function time limit. Use Cloud Tasks (`GCP_PROJECT_ID`) for those. The self-hosted gosom engine needs Docker and does not run on Vercel.
+
+## 5. Deploy (Google Cloud Run)
 Fill `backend/env.yaml` (from `env.yaml.example`, with `GCP_PROJECT_ID`, `BACKEND_URL` and `PUBLIC_BASE_URL` set) and `frontend/.env`, then run **`deploy.bat`**.
 
 ## Search engines (Lead Discovery → Advanced)

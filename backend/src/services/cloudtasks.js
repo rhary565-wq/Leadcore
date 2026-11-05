@@ -39,13 +39,40 @@ async function enqueueLocal(endpoint, payload) {
   return `local:${endpoint}:${Date.now()}`;
 }
 
+// On Vercel (no long-running server): run the worker inside this function and
+// keep it alive with waitUntil until the job finishes (bounded by maxDuration).
+const WORKERS = {
+  '/worker/scrape':           () => require('../workers/scrape').handleScrape,
+  '/worker/clean':            () => require('../workers/clean').handleClean,
+  '/worker/hubspot':          () => require('../workers/hubspot').handleHubspot,
+  '/worker/enrich':           () => require('../workers/enrich').handleEnrich,
+  '/worker/hubspot-contacts': () => require('../workers/hubspotContacts').handleHubspotContacts,
+  '/worker/apollo-batch':     () => require('../workers/apolloBatch').handleApolloBatch,
+};
+
+function enqueueInProcess(endpoint, payload) {
+  const handler = WORKERS[endpoint]?.();
+  if (!handler) throw new Error(`Unknown worker ${endpoint}`);
+  const res = { statusCode: 200, status(c) { this.statusCode = c; return this; }, json() { return this; }, send() { return this; } };
+  const req = { body: payload, headers: { 'x-internal-token': internalToken() } };
+  console.log(`[queue:vercel] → ${endpoint}`);
+  const job = Promise.resolve()
+    .then(() => handler(req, res))
+    .catch(err => console.error(`[queue:vercel] ${endpoint} failed:`, err.message));
+  try {
+    const { waitUntil } = require('@vercel/functions');
+    waitUntil(job);
+  } catch { /* not on Vercel: the promise simply runs */ }
+  return `vercel:${endpoint}:${Date.now()}`;
+}
+
 async function enqueue(queueName, endpoint, payload) {
   const PROJECT  = process.env.GCP_PROJECT_ID;
   const LOCATION = process.env.GCP_REGION || 'asia-southeast1';
   const BACKEND  = process.env.BACKEND_URL;
 
   if (!PROJECT || process.env.QUEUE_MODE === 'local') {
-    return enqueueLocal(endpoint, payload);
+    return process.env.VERCEL ? enqueueInProcess(endpoint, payload) : enqueueLocal(endpoint, payload);
   }
   if (!BACKEND) throw new Error('BACKEND_URL env var is not set');
 
